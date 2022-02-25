@@ -24,5 +24,6 @@ db.medico = require("./medico.model.js")(sequelize, Sequelize);
 db.paciente = require("./paciente.model.js")(sequelize, Sequelize);
 db.especialidade = require("./especialidade.model.js")(sequelize, Sequelize);
 db.plano = require("./plano.model.js")(sequelize, Sequelize);
+db.agenda = require("./agenda.model.js")(sequelize, Sequelize);
 
 module.exports = db;

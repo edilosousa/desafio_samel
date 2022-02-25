@@ -18,5 +18,5 @@
 # NODE JS
 ## Com o node js instalado na máquina em uma ultima versão estável, abra o projeto e digite o seguinte comando:
 ### npm start
-#### Esse comando será executado o sistema e criará todas as tabelas ja definidas na MODELS do projeto, não precisa criar as tabelas.
+#### Esse comando será executado o sistema e criará todas as tabelas automaticamente ja definidas na MODELS do projeto
 

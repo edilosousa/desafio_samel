@@ -7,3 +7,9 @@ Desafio de backend para a empresa SAMEL
 
 ## DOCKER COMPOSE - Após criar a ponte de acesso externo, criaremos nosso container através do arquivo docker-compose.yml
 ### - comandos: docker compose up -d
+
+## Acesso ao BD através de um gerenciador de banco de dados exemplo o HEIDI SQL ou MYSQL WORKBENCH
+### Credenciais 
+### HOST: localhost
+### USER: root
+### PASS: 123

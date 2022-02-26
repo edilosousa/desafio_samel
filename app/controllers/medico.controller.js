@@ -60,6 +60,21 @@ exports.findOne = (req, res) => {
         });
 };
 
+exports.findMedCrm = (req, res) => {
+    const crm = req.params['crm'];
+    var condition = crm ? { MED_CRM: { [Op.like]: `%${crm}%` } } : null;
+
+    Medico.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Erro ao buscar os registro"
+            });
+        });
+}
 // Altera um registro no banco de dados.
 exports.update = (req, res) => {
     const id = req.params.id;

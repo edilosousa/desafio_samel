@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
       MED_FK_ID_ESP: {
         type: Sequelize.INTEGER
       },
+      MED_UF: {
+        type: Sequelize.STRING
+      },
       MED_CRM: {
         type: Sequelize.STRING
       },

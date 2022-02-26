@@ -12,6 +12,9 @@ module.exports = app => {
     // Rota para listar apenas um Médico
     router.get("/:id", medicos.findOne);
 
+    // Rota para consultar o Médico pelo CRM
+    router.post("/crm/:crm", medicos.findMedCrm);
+
     // Rota de alteração do Médico
     router.put("/:id", medicos.update);
 

@@ -16,6 +16,8 @@ require('./app/routes/paciente.routes')(app)
 require('./app/routes/plano.routes')(app)
 require('./app/routes/especialidade.routes')(app)
 require('./app/routes/agenda.routes')(app)
+require('./app/routes/sala.routes')(app)
+require('./app/routes/consulta.routes')(app)
 
 app.listen(port, () => {
     console.log(`Server NodeJS rodando no endereço http://localhost:${port}`)

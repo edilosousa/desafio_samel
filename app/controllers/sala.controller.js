@@ -6,15 +6,14 @@ const Op = db.Sequelize.Op;
 // Criamos um novo registro no banco de uma Sala
 exports.create = (req, res) => {
     // Valida a requisição.
-    if (!req.body.data) {
+    if (!req.body.sala) {
         res.status(400).send({
-            message: "Data não pode ser vazio!"
+            message: "Sala não pode ser vazio!"
         });
         return;
     }
     const sala = {
-        AGE_DATA_DISPONIVEL: req.body.data,
-        AGE_FK_ID_MED: req.body.medico
+        SAL_NOME: req.body.sala
     };
     Sala.create(sala)
         .then(data => {
@@ -30,8 +29,8 @@ exports.create = (req, res) => {
 
 // Recupera todos os registros no banco de dados.
 exports.findAll = (req, res) => {
-    const nome = req.body.nome;
-    var condition = nome ? { ESP_AREA: { [Op.like]: `%${nome}%` } } : null;
+    const sala = req.body.sala;
+    var condition = sala ? { SAL_NOME: { [Op.like]: `%${sala}%` } } : null;
 
     Sala.findAll({ where: condition })
         .then(data => {
@@ -65,7 +64,7 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     Sala.update(req.body, {
-        where: { ESP_ID: id }
+        where: { SAL_ID: id }
     })
         .then(num => {
             if (num == 1) {
@@ -90,7 +89,7 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     Sala.destroy({
-        where: { ESP_ID: id }
+        where: { SAL_ID: id }
     })
         .then(num => {
             if (num == 1) {

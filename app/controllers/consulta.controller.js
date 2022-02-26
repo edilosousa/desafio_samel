@@ -1,23 +1,15 @@
 
 const db = require('../models');
-const Agenda = db.agenda;
+const Consulta = db.consulta;
 const Op = db.Sequelize.Op;
 
 // Criamos um novo registro no banco de uma Agenda
 exports.create = (req, res) => {
-    // Valida a requisição.
-    if (!req.body.data) {
-        res.status(400).send({
-            message: "Data não pode ser vazio!"
-        });
-        return;
-    }
-    const agenda = {
-        AGE_DATA_DISPONIVEL: req.body.data,
-        AGE_FK_ID_MED: req.body.medico,
-        AGE_FK_ID_SALA: req.body.sala
+    const consulta = {
+        CON_FK_ID_AGE : req.body.agenda,
+        CON_FK_ID_PACIENTE: req.body.paciente
     };
-    Agenda.create(agenda)
+    Consulta.create(consulta)
         .then(data => {
             res.send(data);
         })

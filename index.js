@@ -4,12 +4,17 @@ const app = express()
 const port = 3000
 var bodyParser = require('body-parser')
 
-
 app.use(cors())
 app.use(bodyParser.json())
 
 const db = require('./app/models')
 db.sequelize.sync()
+
+const timezone = require('moment-timezone')
+const moment = require('moment')
+const agora = timezone.tz(new Date(),"YYYY-MM-DD HH:mm:ss","America/Manaus").format();
+const agora2 = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+console.log(agora2)
 
 require('./app/routes/medico.routes')(app)
 require('./app/routes/paciente.routes')(app)

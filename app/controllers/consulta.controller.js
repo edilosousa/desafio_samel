@@ -1,12 +1,12 @@
-
 const db = require('../models');
 const Consulta = db.consulta;
 const Op = db.Sequelize.Op;
+const { QueryTypes } = require('sequelize');
 
 // Criamos um novo registro no banco de uma Agenda
 exports.create = (req, res) => {
     const consulta = {
-        CON_FK_ID_AGE : req.body.agenda,
+        CON_FK_ID_AGE: req.body.agenda,
         CON_FK_ID_PACIENTE: req.body.paciente
     };
     Consulta.create(consulta)
@@ -22,83 +22,17 @@ exports.create = (req, res) => {
 };
 
 // Recupera todos os registros no banco de dados.
-exports.findAll = (req, res) => {
-    const nome = req.body.nome;
-    var condition = nome ? { ESP_AREA: { [Op.like]: `%${nome}%` } } : null;
-
-    Agenda.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Erro ao buscar os registro"
-            });
-        });
-};
-
-// Buscar apenas um registro no corpo da requisição por um parametro
-exports.findOne = (req, res) => {
-    const id = req.params.id;
-
-    Agenda.findByPk(id)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error ao buscar com o id=" + id
-            });
-        });
-};
-
-// Altera um registro no banco de dados.
-exports.update = (req, res) => {
-    const id = req.params.id;
-
-    Agenda.update(req.body, {
-        where: { ESP_ID: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Agenda Alterada com sucesso!"
-                });
-            } else {
-                res.send({
-                    message: `Não pode alterar a Agenda com o id=${id}!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Erro alterar a Agenda com o id=" + id
-            });
-        });
-};
-
-// Deleta um registro no banco de dados
-exports.delete = (req, res) => {
-    const id = req.params.id;
-
-    Agenda.destroy({
-        where: { ESP_ID: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Agenda deletada com sucesso"
-                });
-            } else {
-                res.send({
-                    message: `Não foi possivel delatar a Agenda com o id=${id}!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Não é possivel deletar a Agenda com o id=" + id
-            });
-        });
+exports.findAll = async (req, res) => {
+    const dt_ini = req.body.dt_ini;
+    const dt_fin = req.body.dt_fin;
+    const consultas = await db.sequelize.query(
+        "SELECT c.CON_ID, m.MED_NOME as Médico, e.ESP_AREA as Especialiidade, p.PAC_NOME as Paciente, a.AGE_DATA_DISPONIVEL AS DATA_CONSULTA FROM tblconsulta c " +
+        "INNER JOIN `tblagenda` a ON a.AGE_ID = c.CON_FK_ID_AGE " +
+        "INNER JOIN tblpaciente p ON p.PAC_ID = c.CON_FK_ID_PACIENTE "+
+        "INNER JOIN tblsala s ON s.SAL_ID = a.AGE_FK_ID_SALA "+
+        "INNER JOIN tblmedico m ON m.MED_ID = a.AGE_FK_ID_MED "+
+        "INNER JOIN tblespecialidade e ON e.ESP_ID = m.MED_FK_ID_ESP "+
+        "WHERE a.AGE_DATA_DISPONIVEL between '"+dt_ini+"' AND '"+dt_fin+"'"
+        , { type: QueryTypes.SELECT });
+    return res.status(200).json(consultas)
 };

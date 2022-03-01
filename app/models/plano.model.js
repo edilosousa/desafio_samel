@@ -6,13 +6,18 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true
       },
       PLA_NOME: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       PLA_DATA_CAD: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
       },
       PLA_STATUS: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        allowNull: false
       }
     }, 
     { 

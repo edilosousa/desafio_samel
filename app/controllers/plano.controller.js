@@ -7,12 +7,12 @@ exports.create = (req, res) => {
     // Valida a requisição.
     if (!req.body.nome) {
         res.status(400).send({
-            message: "Nome não pode ser vazio!"
+            message: "Nome do plano não pode ser vazio!"
         });
         return;
     }
     const plano = {
-        PLA_NOME: req.body.nome,
+        PLA_NOME: req.body.nome
     };
     Plano.create(plano)
         .then(data => {

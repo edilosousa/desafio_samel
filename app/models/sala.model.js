@@ -6,13 +6,19 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true
       },
       SAL_NOME: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       SAL_DATA_CAD: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
       },
       SAL_STATUS: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        allowNull: false
+
       }
     }, 
     { 

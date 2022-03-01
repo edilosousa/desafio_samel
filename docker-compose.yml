@@ -4,7 +4,8 @@ services:
   container_name: mysql5
   image: mysql:5.6.47
   environment: 
-   MYSQL_ROOT_PASSWORD: "123"
+   MYSQL_ROOT_PASSWORD: "123",
+   MYSQL_DATABASE: "samel",
    TZ: America/Manaus
   ports:
    - '3307:3306'

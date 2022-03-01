@@ -6,19 +6,26 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true
       },
       PAC_NOME: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       PAC_FK_ID_PLA: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       PAC_TELEFONE: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       PAC_DATA_CAD: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
       },
       PAC_STATUS: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        allowNull: false
       }
     }, 
     { 

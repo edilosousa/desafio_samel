@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const Agenda = db.agenda;
 const Op = db.Sequelize.Op;
@@ -6,9 +5,9 @@ const Op = db.Sequelize.Op;
 // Criamos um novo registro no banco de uma Agenda
 exports.create = (req, res) => {
     // Valida a requisição.
-    if (!req.body.data) {
+    if (!req.body.data || !req.body.medico || !req.body.sala) {
         res.status(400).send({
-            message: "Data não pode ser vazio!"
+            message: "Campos não podem ser vazio!"
         });
         return;
     }
@@ -24,7 +23,7 @@ exports.create = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Erro ao criar um novo registro"
+                    err.message || "Erro ao criar uma nova agenda"
             });
         });
 };

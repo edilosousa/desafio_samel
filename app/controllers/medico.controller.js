@@ -14,6 +14,7 @@ exports.create = (req, res) => {
     const medico = {
         MED_NOME: req.body.nome,
         MED_FK_ID_ESP: req.body.especialidade,
+        MED_UF: req.body.uf,
         MED_CRM: req.body.crm,
     };
     Medico.create(medico)

@@ -6,20 +6,26 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true
       },
       AGE_FK_ID_MED: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       AGE_DATA_DISPONIVEL: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       },
       AGE_FK_ID_SALA: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       AGE_DATA_CAD: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
       },
       AGE_STATUS: {
         type: Sequelize.INTEGER,
-        defaultValue: 1
+        defaultValue: 1,
+        allowNull: false
       }
     }, 
     { 

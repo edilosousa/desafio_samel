@@ -1,15 +1,11 @@
 const db = require('../models');
 const Sala = db.sala;
 const Op = db.Sequelize.Op;
-const moment = require('moment')
-const timezone = require('moment-timezone')
-
-const agora = timezone.tz(new Date(),"America/Manaus").format("YYYY-MM-DD hh:mm:ss");
-const agora2 = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
 
 
 // Criamos um novo registro no banco de uma Sala
 exports.create = (req, res) => {
+
     // Valida a requisição.
     if (!req.body.sala) {
         res.status(400).send({
@@ -18,12 +14,12 @@ exports.create = (req, res) => {
         return;
     }
     const sala = {
-        SAL_NOME: req.body.sala,
-        SAL_DATA_CAD: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+        SAL_NOME: req.body.sala
     };
     Sala.create(sala)
         .then(data => {
             res.send(data);
+            console.log(data);
         })
         .catch(err => {
             res.status(500).send({

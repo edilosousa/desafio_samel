@@ -257,5 +257,5 @@ http://localhost:3000/api/consultas/realizar-consulta
 	"conf": 2
 }
 <br>
--- Onde informará o ID do agendamento e confirmação ou 1 = "Não realizada" ou 2 = "Realizada", o banco de dados salvará corretamente a hora dessa confirmação.
+-- Onde informará o ID do agendamento e confirmação ( 1 = "Não realizada" ou 2 = "Realizada" ), o banco de dados salvará corretamente a hora dessa confirmação.
 

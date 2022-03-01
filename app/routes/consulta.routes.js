@@ -9,5 +9,8 @@ module.exports = app => {
     // Rota para listar todos as consulta
     router.get("/", consultas.findAll);
 
+    // Rota para confirmar a consulta ao paciente
+    router.post("/realizar-consulta", consultas.realizar);
+
     app.use('/api/consultas', router);
   };

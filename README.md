@@ -40,7 +40,7 @@
 # <br>
 
 # **ROTAS API REST**
-## **Usando alguma ferramenta para enviar requisições HTTP tais como, POSTMAN ou INSOMNIA, passamos as seguintes rotas com requisições em formato JSON**:
+## **Usando alguma ferramenta para enviar requisições HTTP tais como, POSTMAN ou INSOMNIA, passamos as seguintes rotas com requisições em formato JSON**: Essa ordem é a forma correta de realizar todos os cadastros.
 
 # <br>
 ## **_SALA_**:
@@ -242,5 +242,20 @@ No corpo da requisição enviando as informações via JSON nesse formato, terá
 http://localhost:3000/api/consultas <br>
 Essa rota listará todas os agendas já cadastradas.
 <br>
-
+-- Passaremos no corpo a data inicial e final para listarmos as consultas realizadas ou não realizadas pelos médicos nessas determinadas informações. <br>
+{
+	"dt_ini":"2022-03-01 00:00:00",
+	"dt_fin":"2022-03-30 23:59:00"
+}
+<br>
+#### **HTTP POST:**
+http://localhost:3000/api/consultas/realizar-consulta
+<br>
+-- Rota que confirma se a consulta foi mesmo realizada pelo médico. Passamos por JSON a seguinte configuração: <br>
+{
+	"id_age":1,
+	"conf": 2
+}
+<br>
+-- Onde informará o ID do agendamento e confirmação ou 1 = "Não realizada" ou 2 = "Realizada", o banco de dados salvará corretamente a hora dessa confirmação.
 

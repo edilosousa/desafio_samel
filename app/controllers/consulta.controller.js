@@ -26,20 +26,34 @@ exports.findAll = async (req, res) => {
     const dt_ini = req.body.dt_ini;
     const dt_fin = req.body.dt_fin;
     const consultas = await db.sequelize.query(
-        "SELECT c.CON_ID, m.MED_NOME as Médico, "+ 
-        "e.ESP_AREA as Especialiidade, p.PAC_NOME as Paciente, "+
-        "a.AGE_DATA_DISPONIVEL AS DATA_CONSULTA, "+
-        "c.CON_DATA_ATENDIMENTO, "+
-        "CASE c.CON_STATUS WHEN '1' then 'Consulta não realizada' "+
-        "ELSE 'Consulta já realizada' "+
-        "END AS Consulta "+
+        "SELECT c.CON_ID, m.MED_NOME as Médico, " +
+        "e.ESP_AREA as Especialiidade, p.PAC_NOME as Paciente, " +
+        "a.AGE_DATA_DISPONIVEL AS DATA_CONSULTA, " +
+        "c.CON_DATA_ATENDIMENTO, " +
+        "CASE c.CON_STATUS WHEN '1' then 'Consulta não realizada' " +
+        "ELSE 'Consulta já realizada' " +
+        "END AS Consulta " +
         "FROM tblconsulta c " +
         "INNER JOIN tblagenda a ON a.AGE_ID = c.CON_FK_ID_AGE " +
-        "INNER JOIN tblpaciente p ON p.PAC_ID = c.CON_FK_ID_PACIENTE "+
-        "INNER JOIN tblsala s ON s.SAL_ID = a.AGE_FK_ID_SALA "+
-        "INNER JOIN tblmedico m ON m.MED_ID = a.AGE_FK_ID_MED "+
-        "INNER JOIN tblespecialidade e ON e.ESP_ID = m.MED_FK_ID_ESP "+
-        "WHERE a.AGE_DATA_DISPONIVEL between '"+dt_ini+"' AND '"+dt_fin+"'"
+        "INNER JOIN tblpaciente p ON p.PAC_ID = c.CON_FK_ID_PACIENTE " +
+        "INNER JOIN tblsala s ON s.SAL_ID = a.AGE_FK_ID_SALA " +
+        "INNER JOIN tblmedico m ON m.MED_ID = a.AGE_FK_ID_MED " +
+        "INNER JOIN tblespecialidade e ON e.ESP_ID = m.MED_FK_ID_ESP " +
+        "WHERE a.AGE_DATA_DISPONIVEL between '" + dt_ini + "' AND '" + dt_fin + "'"
         , { type: QueryTypes.SELECT });
     return res.status(200).json(consultas)
 };
+
+exports.realizar = async (req, res) => {
+    const idAgenda = req.body.id_age;
+    const conf = req.body.conf;
+    const consultas = await db.sequelize.query(
+        "UPDATE tblconsulta SET CON_DATA_ATENDIMENTO = NOW(), CON_STATUS = " + conf + " " +
+        "WHERE CON_ID = " + idAgenda + " "
+        , { type: QueryTypes.UPDATE });
+    if (consultas[1] === 1) {
+        return res.status(200).json({ "Alterado": "SIM" })
+    } {
+        return res.status(500).json({ "Alterado": "NÃO" })
+    }
+}

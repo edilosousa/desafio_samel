@@ -152,7 +152,7 @@ Essa rota listará apenas o especialidade com ID especificado por parâmetro.
 http://localhost:3000/api/especialidades/1 <br>
 No corpo da requisição enviando as informações via JSON nesse formato, realizará a alteração apenas em uma especialidade <br>
 {
-	"ESP_AREA": "UROLOGIA",
+	"ESP_AREA": "UROLOGIA"
 }
 <br>
 #### **HTTP DELETE:** <br>
@@ -220,7 +220,7 @@ http://localhost:3000/api/agendas/1 <br>
 No corpo da requisição enviando as informações via JSON nesse formato, realizará a alteração apenas em uma agenda. <br>
 {
     "AGE_DATA_DISPONIVEL":"2022-03-21 18:00:00",
-    "AGE_FK_ID_SALA":"4",
+    "AGE_FK_ID_SALA":"4"
 }
 <br>
 #### **HTTP DELETE:** <br>
